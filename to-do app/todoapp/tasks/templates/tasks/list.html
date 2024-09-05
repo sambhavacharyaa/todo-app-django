@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}List{% endblock %}
+{% block content %}
+<div class="mt-4">
+
+    <form method='POST' action=''>
+        {% csrf_token %}
+        {{form.title}}
+        <input type="submit" value="Create Task" class='btn btn-success'>
+    </form>
+    {% for task in tasks  %}
+    
+    <div class='mt-4 bg-dark-subtle'>
+        <a href="{% url "update" task.id %}" role='button' class='btn btn-primary'>Update</a>
+        <a href="{% url "delete" task.id %}" role='button' class='btn btn-danger'>Delete</a>
+        {% if task.complete == True %}
+        <strike>{{task}}</strike>
+        {% else %}
+        <span>{{task}}</span>
+        
+        {% endif %}
+        
+    </div>
+    {% endfor %}
+    {% endblock %}
+</div>
